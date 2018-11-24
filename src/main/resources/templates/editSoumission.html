@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+	layout:decorator="layoutEnseignant">
+<head>
+<meta charset="utf-8"/>
+<title>EDITER</title>
+<link rel="stylesheet" type="text/css"
+href="../static/css/spacers.css"
+th:href="@{/css/spacers.css}"/>
+</head>
+<body>
+	<div layout:fragment="content">
+	<div class="panel-body" style= "color:Tomato" th:text="${alert}"></div>
+				<div class="col-md-6 col-sl-6 col-xs-12 spacer col-md-offset-3">
+			<div class="panel panel-default">
+				<div class="panel-heading">DESCRIPTION</div>
+				<div class="panel-body" >
+				<table class="table">
+				<tr><td style= "color:blue"> ID</td>
+				<td style= "color:blue"> ETUDIANT </td>
+				<td style= "color:blue"> PROBLEME </td>
+				<td style= "color:blue"> DATE </td>
+				<td style= "color:blue"> PLAGIAT </td>
+				</tr>
+				<tr>
+				<td th:text="${solution.id}"></td>
+				<td th:text="${solution.probleme.titre}"></td>
+				<td th:text="${solution.etudiant.username}"></td>
+				<td th:text="${solution.Date}"></td>
+				<td th:if="${solution.plagiat}">YES</td>
+				<td th:unless="${solution.plagiat}">NO</td>
+				</tr>
+				</table>
+				</div>
+				<div class="panel-heading">CODE</div>
+				<div class="panel-body" th:text="${solution.code}">
+				</div>
+			</div>
+		</div>
+			<div class="col-md-6 col-sl-6 col-xs-12 spacer col-md-offset-3">
+			<div class="panel panel-default">
+				<div class="panel-heading">EDITER SOUMISSION</div>
+					<div class="panel-body">
+						<form th:action="@{/editersoumission}"
+						method="post">
+						<div class="form-group">
+						
+						<input list="result" name="result" />
+						<datalist id="result">
+						  <option value="WAIT"/>
+						  <option value="YES"/>
+						  <option value="NO"/>
+						</datalist>
+						</div>
+						<div>
+						<input type="hidden" th:field="*{enseignant.username}" class="form-control" name="username"/>
+						<input type="hidden" th:field="*{solution.id}" class="form-control" name="id"/>
+						<button type="submit" class="btn btn-primary"> ENREGISTRER</button>
+						</div>
+						</form>
+				</div>
+			</div>
+		</div>
+    </div>
+</body>
+</html>

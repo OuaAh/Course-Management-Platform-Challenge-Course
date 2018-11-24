@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+	layout:decorator="layoutEtudiant">
+<head>
+<meta charset="utf-8"/>
+<title>HISTORIQUE</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		
+		<div class="col-md-9">
+			<div class="panel panel-primary">
+				<div class="panel-heading">LISTE SOUMISSIONS</div>
+				<div class="panel-body">
+				<table class="table">
+				<thead>
+				<tr>
+				<th>ID</th><th>ETUDIANT</th><th>PROBLEME</th><th>DATE</th><th>RESULTAT</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr th:each="e:${pagesolutions.content}">
+				<td th:text="${e.id}"></td>
+				<td th:text="${e.etudiant.username}"></td>
+				<td th:text="${e.probleme.titre}"></td>
+				<td th:text="${e.date}"></td>
+				<td th:text="${e.result}"></td>
+				</tr>
+				</tbody>
+				</table>
+				
+				</div>
+			</div>
+			<div class="container">
+			<ul class= "nav nav-pills">
+			<li th:each="p:${pages}" th:class="${p==pageCourante}?active:''">
+			<a th:text="${p}" th:href="@{consulterHistoriqueProbEtu(page=${p},username=${etudiant.username},id=${probleme.id})}"></a>
+			</li></ul>
+			
+			</div>
+		</div>
+		
+	</div>
+</body>
+</html>

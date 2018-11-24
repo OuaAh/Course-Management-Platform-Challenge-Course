@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+	layout:decorator="layoutEnseignant">
+<head>
+<meta charset="utf-8"/>
+<title>PROBLEMES</title>
+<link rel="stylesheet" type="text/css"
+href="../static/css/spacers.css"
+th:href="@{/css/spacers.css}"/>
+</head>
+<body>
+	<div layout:fragment="content">
+	<p style= "color:Tomato;" >PROBLEME AJOUTE </p>
+	<br/>
+		<div class="col-md-9" th:if="${nbr}">
+			<div class="panel panel-primary" >
+				<div class="panel-heading">PROBLEMES QUI RESSEMBLENT AU PROBLEME AJOUTE (QUASI-DUPLIQUES)</div>
+				<div class="panel-body">
+				<table class="table">
+				<thead>
+				<tr>
+				<th>ID</th><th>TITRE</th><th>DATE</th><th>TYPE</th><th>DIFFICULTE</th><th>MODIFIER</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr th:each="e:${pagesolutions}">
+				<td th:text="${e.id}"></td>
+				<td th:text="${e.titre}"></td>
+				<td th:text="${e.date}"></td>
+				<td th:text="${e.type}"></td>
+				<td th:text="${e.difficultie}"></td>
+				<td><a th:href="@{/modifierproblemepage(id=${e.id},username=${enseignant.username})}">MODIFIER</a></td>
+				
+				</tr>
+				</tbody>
+				</table>
+				</div>
+			</div>
+			<div class="container">
+			<ul class= "nav nav-pills">
+			<li th:each="p:${pages}" th:class="${p==pageCourante}?active:''">
+			<a th:text="${p}" th:href="@{listeProblemes(page=${p},username=${enseignant.username})}"></a>
+			</li></ul>
+			</div>
+			<div class="col-md-9">
+			<div class="panel panel-default">
+				<div class="panel-heading" style= "color:blue;">
+				<a th:href="@{/supprimerproblemeacc(username=${enseignant.username})}">SUPPRIMER LE PROBLEME AJOUTE</a>
+				</div>
+				</div>
+				</div>
+				
+		</div>
+		<div class="col-md-9" th:unless="${nbr}">
+			<div class="panel panel-primary" >
+				<div class="panel-heading">PAS DE PROBLEMES QUI RESSEMBLENT AU PROBLEME AJOUTE (QUASI-DUPLIQUES)</div>
+				</div>
+				</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+	layout:decorator="layoutEtudiant">
+<head>
+<meta charset="utf-8"/>
+<title>COURS</title>
+<link rel="stylesheet" type="text/css"
+href="../static/css/spacers.css"
+th:href="@{/css/spacers.css}"/>
+</head>
+<body>
+	<div layout:fragment="content">
+			<div class="col-md-9 col-sm-9 col-xs-12 spacer40 col-md-offser-3">
+			<div class="panel panel-primary">
+				<div class="panel-heading">DESCRIPTION</div>
+				<div class="panel-body" >
+				<table class="table">
+				<tr>
+				<td style= "color:blue"> ID </td>
+				<td style= "color:blue"> TITRE</td>
+				<td style= "color:blue"> ENSEIGNANT </td>
+				<td style= "color:blue"> DATE </td>
+				</tr>
+				<tr>
+				<td th:text="${cours.id}"></td>
+				<td th:text="${cours.titre}"></td>
+				<td th:text="${cours.enseignant.username}"></td>
+				<td th:text="${cours.Date}"></td>
+				</tr>
+				</table>
+				
+				</div>
+				
+				<div class="panel-heading">ENONCE</div>
+				<div class="panel-body" >
+				<label th:text="${cours.contenu}"></label>
+				</div>
+				<br/><br/>
+				<br/><br/>
+			</div>
+		</div>
+		
+    </div>
+</body>
+</html>

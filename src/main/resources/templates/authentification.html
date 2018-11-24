@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout">
+<head>
+<meta charset="utf-8"/>
+<link rel="icon" type="image/png" href="../static/images/CCP.png" th:href="@{/images/CCP.png}"/>
+<link rel="stylesheet" type="text/css"
+href="../static/css/Style.css"
+th:href="@{/css/Style.css}"/>
+<title>AUTHENTIFICATION</title>
+</head>
+<body>
+<div class="login-page">
+  <div class="form">
+    <form class="login-form" th:action="@{/consulterCompte}" method="post">
+    	<p> PLATEFORME DE GESTION DU COURS CHALLENGE </p>
+      <input type="text" placeholder="USERNAME" name="username" th:required="required"/>
+      <input type="password" placeholder="PASSWORD" name="password" th:required="required"/>
+      <button type="submit">CONNEXION</button>
+      <p style= "color:Tomato;" th:if="${erreur}" > USERNAME OU/ET PASSWORD INCORRECTS </p>
+    </form>
+  </div>
+</div>
+</body>
+</html>

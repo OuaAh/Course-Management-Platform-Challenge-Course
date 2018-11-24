@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+	layout:decorator="layoutEnseignant">
+<head>
+<meta charset="utf-8"/>
+<title>PROBLEMES</title>
+<link rel="stylesheet" type="text/css"
+href="../static/css/spacers.css"
+th:href="@{/css/spacers.css}"/>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="col-md-6 col-sl-6 col-xs-12 col-md-offset-3">
+			<div class="panel panel-primary">
+				<div class="panel-heading">MODIFIER COURS</div>
+					<div class="panel-body">
+						<p style= "color:Tomato;" th:if="${modifier}" > COURS MODIFIE </p>
+						<form th:action="@{/modifiercours}"
+						method="post">
+						<div class="form-group">
+						<label class="control-label"> TITRE </label>
+						<input th:required="required" type="text" th:field="*{cours.titre}" class="form-control" name="titre"/>
+						<span class="text-danger" th:errors="*{cours.titre}"></span>
+						</div>
+						
+						<div class="form-group">
+						<label class="control-label"> ENONCE </label>
+						<textarea rows="20" cols="50" class="form-control"  th:required="required" placeholder="ENONCE" th:field="*{cours.contenu}" name="contenu"></textarea>
+						
+						</div>
+						<input type="hidden" th:field="*{enseignant.username}" class="form-control" name="username" th:required="required"/>
+						<input type="hidden" th:field="*{cours.id}" class="form-control" name="id" th:required="required"/>
+						<div>
+						<button type="submit" class="btn btn-primary"> MODIFIER </button>
+						</div>
+						</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

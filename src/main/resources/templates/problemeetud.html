@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+	layout:decorator="layoutEtudiant">
+<head>
+<meta charset="utf-8"/>
+<title>PROBLEME</title>
+<link rel="stylesheet" type="text/css"
+href="../static/css/spacers.css"
+th:href="@{/css/spacers.css}"/>
+</head>
+<body>
+	<div layout:fragment="content">
+			<div class="col-md-9 col-sm-9 col-xs-12 spacer40 col-md-offser-3">
+			<div class="panel panel-primary">
+				<div class="panel-heading">DESCRIPTION</div>
+				<div class="panel-body" >
+				<table class="table">
+				<tr><td style= "color:blue"> TITRE</td>
+				<td style= "color:blue"> TYPE </td>
+				<td style= "color:blue"> CREATEUR </td>
+				<td style= "color:blue"> DIFFICULTE </td>
+				<td style= "color:blue"> DATE </td>
+					<td style= "color:blue"> NOMBRE ACCEPTE </td>
+				</tr>
+				<tr>
+				<td th:text="${probleme.titre}"></td>
+				<td th:text="${probleme.type}"></td>
+				<td th:text="${probleme.enseignant.username}"></td>
+				<td th:text="${probleme.difficultie}"></td>
+				<td th:text="${probleme.Date}"></td>
+				<td th:text="${stat}"></td>
+				</tr>
+				</table>
+				
+				</div>
+				
+				<div class="panel-heading">ENNONCE</div>
+				<div class="panel-body" >
+				<label th:text="${probleme.ennonce}"></label>
+				</div>
+				<br/><br/>
+				<div class="panel-heading">INPUT</div>
+				<div class="panel-body" >
+				<label th:text="${probleme.input}"></label>
+				</div>
+				<br/><br/>
+				<div class="panel-heading">OUTPUT</div>
+				<div class="panel-body" >
+				<label th:text="${probleme.output}"></label>
+				</div>
+				<br/><br/>
+			</div>
+		</div>
+		
+		<div class="col-md-7 col-sm-9 col-xs-12 spacer40 col-md-offser-3">
+			<div class="panel panel-primary">
+				<div class="panel-heading">SOUMISSION</div>
+				<div class="panel-body">
+					<form th:action="@{/SaveSubmit}"
+						method="post">
+						<div class="form-group">
+							<textarea rows="25" cols="95" name="code" th:required="required" placeholder="VOTRE CODE"></textarea>
+							<input type="hidden" th:field="*{probleme.id}" class="form-control" name="id"/>
+							<input type="hidden" th:field="*{etudiant.username}" class="form-control" name="username"/>
+							<button type="submit" class="btn btn-primary"> SOUMETTRE</button>
+						</div>
+					</form>
+				</div>
+			</div>
+
+		</div>
+		
+    </div>
+</body>
+</html>

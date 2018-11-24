@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+	layout:decorator="layoutEtudiant">
+<head>
+<meta charset="utf-8"/>
+<title>ETUDIANT</title>
+<link rel="stylesheet" type="text/css"
+href="../static/css/spacers.css"
+th:href="@{/css/spacers.css}"/>
+</head>
+<body>
+	<div layout:fragment="content">
+			<div class="col-md-9 col-sm-9 col-xs-12 spacer40 col-md-offser-3">
+			<div class="panel panel-default">
+				<div class="panel-heading">PRESENTATION</div>
+				<div class="panel-body" style= "color:blue;">
+				Bienvenu,<br/>
+				
+				Ce projet s’inscrit dans le cadre du projet de conception et de développement (PCD).
+				
+				<br/>
+				
+				Cette plateforme aidera les enseignants à mieux gérer les problèmes et les cours et à suivre le rendement des élèves, ainsi qu'à aider les élèves à se préparer aux défis de programmation.
+
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-9 col-sm-9 col-xs-12 spacer40 col-md-offser-3">
+			<div class="panel panel-default">
+				<div class="panel-heading">INSTRUCTIONS</div>
+				<div class="panel-body" style= "color:blue;">
+				Naviguez dans le meuu afin de:
+				<br/>
+					* Visualiser / Gérer la liste des problemes.
+				<br/>	
+					* Visualiser / Gérer la liste des cours.
+				<br/>
+					* Visualiser / Gérer votre compte.
+				<br/>
+					* Visualiser votre historique.
+
+				</div>
+			</div>
+		</div>
+		
+    </div>
+</body>
+</html>

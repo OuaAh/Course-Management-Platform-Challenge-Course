@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+	layout:decorator="layoutEnseignant">
+<head>
+<meta charset="utf-8"/>
+<title>EDITER PROBLEMES</title>
+<link rel="stylesheet" type="text/css"
+href="../static/css/spacers.css"
+th:href="@{/css/spacers.css}"/>
+</head>
+<body>
+	<div layout:fragment="content">
+		
+		<div class="col-md-6 col-sl-6 col-xs-12 col-md-offset-3">
+			<div class="panel panel-primary">
+				<div class="panel-heading">MODIFIER PROBLEME</div>
+					<div class="panel-body">
+					<p style= "color:Tomato;" th:if="${modifier}" > PROBLEME MODIFIE </p>
+						<form th:action="@{/modifierprobleme}"
+						method="post">
+						<div class="form-group">
+						<label class="control-label"> TITRE </label>
+						<input th:required="required" type="text" th:field="*{probleme.titre}" class="form-control" name="titre"/>
+						<span class="text-danger" th:errors="*{probleme.titre}"></span>
+						</div>
+						
+						<div class="form-group">
+						<label class="control-label"> DIFFICULTIE </label>
+						<input th:required="required" list="list" th:field="*{probleme.difficultie}" class="form-control" name="difficultie" maxlength="2"/>
+							<datalist id="list" >
+							  <option value="A"/>
+							  <option value="B"/>
+							  <option value="C"/>
+							  <option value="D"/>
+							  <option value="E"/>
+							  <option value="F"/>
+							</datalist>
+						<span class="text-danger" th:errors="*{probleme.difficultie}"></span>
+						</div>
+						
+						<div class="form-group">
+						<label class="control-label"> TYPE </label>
+						<input th:required="required" list="listtype" th:field="*{probleme.type}"  class="form-control" name="type"/>
+							<datalist id="listtype" >
+							  <option value="IMPLEMENTATION"/>
+							  <option value="STRINGS"/>
+							  <option value="GEOMETRIE"/>
+							  <option value="PROGRAMMATION DYNAMIQUE"/>
+							  <option value="THEORIE DE GRAPHE"/>
+							  <option value="GREEDY"/>
+							  <option value="GREEDY"/>
+							</datalist>
+						<span class="text-danger" th:errors="*{enseignant.email}"></span>
+						</div>
+						
+						<div class="form-group">
+						<label class="control-label"> ENONCE </label>
+						<textarea placeholder="ENONCE" th:required="required" rows="4" cols="50" class="form-control" th:field="*{probleme.ennonce}" name="ennonce"></textarea>
+						<span class="text-danger" th:errors="*{enseignant.nom}"></span>
+						</div>
+						
+						<div class="form-group">
+						<label class="control-label"> INPUT </label>
+						<textarea placeholder="INPUT" rows="4" cols="50" class="form-control" th:field="*{probleme.input}" name="input"></textarea>
+						<span class="text-danger" th:errors="*{enseignant.password}"></span>
+						</div>
+						
+						<div class="form-group">
+						<label class="control-label"> OUTPUT </label>
+						<textarea placeholder="OUTPUT" rows="4" cols="50" class="form-control"  th:field="*{probleme.output}" name="output"></textarea>
+						<span class="text-danger" th:errors="*{enseignant.email}"></span>
+						</div>
+						<input type="hidden" th:field="*{enseignant.username}" class="form-control" name="username"/>
+						<input type="hidden" th:field="*{probleme.id}" class="form-control" name="id"/>
+						<div>
+						<button type="submit" class="btn btn-primary"> MODIFIER </button>
+						</div>
+						</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

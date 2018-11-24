@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+	layout:decorator="layoutEnseignant">
+<head>
+<meta charset="utf-8"/>
+<title>ETUDIANTS</title>
+<link rel="stylesheet" type="text/css"
+href="../static/css/spacers.css"
+th:href="@{/css/spacers.css}"/>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div style= "color:Tomato;" th:if="${param.error}" class="col-md-4">
+      						USERNAME DEJA UTILISE <br/> <br/></div>
+      	<div style= "color:Tomato;" th:if="${param.error1}" class="col-md-4">
+      						NOM DEJA UTILISE <br/> <br/></div>
+      	
+      	<div class="col-md-11">
+		<div class="panel panel-default">
+		<div class="panel-body">
+			<form th:action="@{/listeEtudiants}">
+			<input type="hidden" th:field="*{enseignant.username}" class="form-control" name="username"  />
+			<label>MOT CLE</label>
+			<input type="text" name="motCle"/>
+			<button type="submit">CHERCHER</button>
+			</form>
+			</div>
+			</div>
+		</div>
+		
+		<div class="col-md-11">
+			<div class="panel panel-primary">
+				<div class="panel-heading">LISTE ETUDIANTS</div>
+				<div class="panel-body">
+				<table class="table">
+				<thead>
+				<tr>
+				<th>USERNAME</th><th>PASSWORD</th><th>NOM</th><th>PRENOM</th><th>GROUPE</th><th>DATE D'INSCRIPTION</th>
+				<th>EMAIL</th><th>HISTORIQUE</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr th:each="e:${pagesolutions.content}">
+				<td th:text="${e.username}"></td>
+				<td th:text="${e.password}"></td>
+				<td th:text="${e.nom}"></td>
+				<td th:text="${e.prenom}"></td>
+				<td th:text="${e.groupe.nom}"></td>
+				<td th:text="${e.date}"></td>
+				<td th:text="${e.email}"></td>
+				<td><a th:href="@{/consulterhistorique(id=${e.username},username=${enseignant.username})}">VOIR</a></td>
+				</tr>
+				</tbody>
+				</table>
+				</div>
+			</div>
+			<div class="container">
+			<ul class= "nav nav-pills">
+			<li th:each="p:${pages}" th:class="${p==pageCourante}?active:''">
+			<a th:text="${p}" th:href="@{/listeEtudiants(page=${p},username=${enseignant.username})}"></a>
+			</li></ul>
+			
+			</div>
+		</div>
+		
+		<div class="col-md-6 col-sl-6 col-xs-12 spacer40 col-md-offset-3">
+			<div class="panel panel-primary">
+				<div class="panel-heading">AJOUTER ETUDIANT</div>
+					<div class="panel-body">
+						<form th:action="@{/saveetudiant}"
+						method="post">
+						
+						<div class="form-group">
+						<label class="control-label"> USERNAME </label>
+						<input th:required="required" type="text" placeholder="USERNAME" class="form-control" name="username1"/>
+						<span class="text-danger" ></span>
+						</div>
+						
+						<div class="form-group">
+						<label class="control-label"> PASSWORD </label>
+						<input th:required="required" type="password" placeholder="PASSWORD" class="form-control" name="password"/>
+						<span class="text-danger" ></span>
+						</div>
+						
+						<div class="form-group">
+						<label class="control-label"> NOM</label>
+						<input th:required="required" type="text" placeholder="NOM" class="form-control" name="nom"/>
+						<span class="text-danger" ></span>
+						</div>
+						<div class="form-group">
+						<label class="control-label"> PRENOM </label>
+						<input th:required="required" type="text" placeholder="PRENOM" class="form-control" name="prenom"/>
+						<span class="text-danger" ></span>
+						</div>
+						<div class="form-group">
+						<label class="control-label"> EMAIL </label>
+						<input th:required="required" type="email" placeholder="EMAIL" class="form-control" name="email"/>
+						<span class="text-danger" ></span>
+						</div>
+						<div class="form-group">
+						<label class="control-label"> GROUPE </label>
+						<input th:required="required" list="list" class="form-control" name="groupe"/>
+							<datalist id="list" >
+							  <option th:each="e:${groupes}" th:text="${e.nom}" />
+							</datalist>
+						</div>
+						<input type="hidden" th:field="*{enseignant.username}" class="form-control" name="username"/>
+						<div>
+						<button type="submit" class="btn btn-primary"> AJOUTER </button>
+						</div>
+
+						</form>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</body>
+</html>

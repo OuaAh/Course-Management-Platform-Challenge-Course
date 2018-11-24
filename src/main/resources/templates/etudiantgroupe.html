@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+	layout:decorator="layoutEnseignant">
+<head>
+<meta charset="utf-8"/>
+<title>HISTORIQUE</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		
+		<div class="col-md-11">
+		<div class="panel panel-default">
+		<div class="panel-body">
+			<form th:action="@{/listeEtudiants}">
+			<input type="hidden" th:field="*{enseignant.username}" class="form-control" name="username"  />
+			<label>MOT CLE</label>
+			<input type="text" name="motCle"/>
+			<button type="submit">CHERCHER</button>
+			</form>
+			</div>
+			</div>
+		</div>
+		
+		<div class="col-md-11">
+			<div class="panel panel-primary">
+				<div class="panel-heading">LISTE ETUDIANTS</div>
+				<div class="panel-body">
+				<table class="table">
+				<thead>
+				<tr>
+				<th>USERNAME</th><th>PASSWORD</th><th>NOM</th><th>PRENOM</th><th>DATE D'INSCRIPTION</th>
+				<th>EMAIL</th><th>HISTORIQUE</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr th:each="e:${pagesolutions.content}">
+				<td th:text="${e.username}"></td>
+				<td th:text="${e.password}"></td>
+				<td th:text="${e.nom}"></td>
+				<td th:text="${e.prenom}"></td>
+				<td th:text="${e.date}"></td>
+				<td th:text="${e.email}"></td>
+				<td><a th:href="@{/consulterhistorique(id=${e.username},username=${enseignant.username})}">VOIR</a></td>
+				</tr>
+				</tbody>
+				</table>
+				</div>
+			</div>
+			<div class="container">
+			<ul class= "nav nav-pills">
+			<li th:each="p:${pages}" th:class="${p==pageCourante}?active:''">
+			<a th:text="${p}" th:href="@{listeProblemes(page=${p},username=${enseignant.username})}"></a>
+			</li></ul>
+			
+			</div>
+		</div>
+	</div>
+</body>
+</html>

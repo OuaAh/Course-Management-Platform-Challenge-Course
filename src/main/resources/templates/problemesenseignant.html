@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+	layout:decorator="layoutEnseignant">
+<head>
+<meta charset="utf-8"/>
+<title>PROBLEMES</title>
+<link rel="stylesheet" type="text/css"
+href="../static/css/spacers.css"
+th:href="@{/css/spacers.css}"/>
+</head>
+<body>
+	<div layout:fragment="content">
+	<p style= "color:Tomato;" th:if="${ajouter}" >PROBLEME AJOUTER </p>
+		<div class="col-md-9">
+		<div class="panel panel-default">
+		<div class="panel-body">
+			<form th:action="@{/listeProblemes}">
+			<input type="hidden" th:field="*{enseignant.username}" class="form-control" name="username"  />
+			<label>MOT CLE</label>
+			<input type="text" name="motCle"/>
+			<button type="submit">CHERCHER</button>
+			</form>
+			</div>
+			</div>
+		</div>
+		<div class="col-md-9">
+			<div class="panel panel-primary">
+				<div class="panel-heading">LISTE PROBLEMES</div>
+				<div class="panel-body">
+				<table class="table">
+				<thead>
+				<tr>
+				<th>ID</th><th>TITRE</th><th>DATE</th><th>TYPE</th><th>DIFFICULTE</th><th>MODIFIER</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr th:each="e:${pagesolutions}">
+				<td th:text="${e.id}"></td>
+				<td th:href="@{/modifierproblemepage(id=${e.id},username=${enseignant.username})}" th:text="${e.titre}"></td>
+				<td th:text="${e.date}"></td>
+				<td th:text="${e.type}"></td>
+				<td th:text="${e.difficultie}"></td>
+				<td><a th:href="@{/modifierproblemepage(id=${e.id},username=${enseignant.username})}">MODIFIER</a></td>
+				
+				</tr>
+				</tbody>
+				</table>
+				</div>
+			</div>
+			<div class="container">
+			<ul class= "nav nav-pills">
+			<li th:each="p:${pages}" th:class="${p==pageCourante}?active:''">
+			<a th:text="${p}" th:href="@{listeProblemes(page=${p},username=${enseignant.username})}"></a>
+			</li></ul>
+			
+			</div>
+		</div>
+		<br/><br/><br/>
+		<div class="col-md-6 col-sl-6 col-xs-12 spacer40 col-md-offset-3">
+			<div class="panel panel-primary">
+				<div class="panel-heading">AJOUTER PROBLEME</div>
+					<div class="panel-body">
+						<form th:action="@{/saveprobleme}"
+						method="post">
+						<div class="form-group">
+						<label class="control-label" th:required="required"> TITRE </label>
+						<input th:required="required" type="text" placeholder="TITRE" class="form-control" name="titre"/>
+						<span class="text-danger" th:errors="*{enseignant.nom}"></span>
+						</div>
+						
+						<div class="form-group">
+						<label class="control-label" > DIFFICULTE </label>
+						<input list="list"  th:required="required" placeholder="DIFFICULTE" class="form-control" name="difficultie" />
+							<datalist id="list" >
+							  <option value="A"/>
+							  <option value="B"/>
+							  <option value="C"/>
+							  <option value="D"/>
+							  <option value="E"/>
+							  <option value="F"/>
+							</datalist>
+						<span class="text-danger" th:errors="*{enseignant.email}"></span>
+						</div>
+						
+						<div class="form-group">
+						<label class="control-label"> TYPE </label>
+						<input th:required="required" placeholder="TYPE" list="listtype" class="form-control" name="type"/>
+						<datalist id="listtype" >
+							  <option value="IMPLEMENTATION"/>
+							  <option value="STRINGS"/>
+							  <option value="GEOMETRIE"/>
+							  <option value="PROGRAMMATION DYNAMIQUE"/>
+							  <option value="THEORIE DE GRAPHE"/>
+							  <option value="GREEDY"/>
+							  <option value="MATH"/>
+						</datalist>
+						<span class="text-danger" th:errors="*{enseignant.email}"></span>
+						</div>
+						
+						<div class="form-group">
+						<label class="control-label"> ENONCE </label>
+						<textarea placeholder="ENONCE" th:required="required" rows="4" cols="50" class="form-control" name="ennonce"></textarea>
+						<span class="text-danger" th:errors="*{enseignant.nom}"></span>
+						</div>
+						
+						<div class="form-group">
+						<label class="control-label"> INPUT </label>
+						<textarea placeholder="INPUT" rows="4" cols="50" class="form-control" name="input"></textarea>
+						<span class="text-danger" th:errors="*{enseignant.password}"></span>
+						</div>
+						
+						<div class="form-group">
+						<label class="control-label"> OUTPUT </label>
+						<textarea placeholder="OUTPUT" rows="4" cols="50" class="form-control" name="output"></textarea>
+						<span class="text-danger" th:errors="*{enseignant.email}"></span>
+						</div>
+						<input type="hidden" th:field="*{enseignant.username}" class="form-control" name="username"/>
+						<div>
+						<button type="submit" class="btn btn-primary"> AJOUTER</button>
+						</div>
+						</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+	layout:decorator="layoutEtudiant">
+<head>
+<meta charset="utf-8"/>
+<title>PROFIL</title>
+<link rel="stylesheet" type="text/css"
+href="../static/css/spacers.css"
+th:href="@{/css/spacers.css}"/>
+</head>
+<body>
+	<div layout:fragment="content">
+			<div class="col-md-6 col-sl-6 col-xs-12 spacer col-md-offset-3">
+			<div class="panel panel-default">
+				<div class="panel-heading">PROFIL</div>
+					<div class="panel-body">
+					<p style= "color:Tomato;" th:if="${alertmodifier}" > MODIFICATIONS ENREGISTREES </p>
+						<form th:action="@{/UpdateEtudiant}"
+						method="post">
+						<div class="form-group">
+						<input th:required="required" type="hidden" th:field="*{etudiant.username}" class="form-control" name="username"  />
+						<label class="control-label"> NOM </label>
+						<input th:required="required" type="text" th:field="*{etudiant.nom}" class="form-control" name="nom"/>
+						<span class="text-danger" th:errors="*{etudiant.nom}"></span>
+						</div>
+						<div class="form-group">
+						<label class="control-label"> PRENOM </label>
+						<input th:required="required" type="text" th:field="*{etudiant.prenom}" class="form-control" name="Prenom"/>
+						<span class="text-danger" th:errors="*{etudiant.nom}"></span>
+						</div>
+						<div class="form-group">
+						<label class="control-label"> PASSWORD </label>
+						<input th:required="required" type="text" th:field="*{etudiant.password}" class="form-control" name="password"/>
+						<span class="text-danger" th:errors="*{etudiant.password}"></span>
+						</div>
+						<div class="form-group">
+						<label class="control-label"> EMAIL </label>
+						<input th:required="required" type="email" th:field="*{etudiant.email}" class="form-control" name="email"/>
+						<span class="text-danger" th:errors="*{etudiant.email}"></span>
+						</div>
+						<div>
+						<button type="submit" class="btn btn-primary"> ENREGISTRER</button>
+						</div>
+						</form>
+				</div>
+			</div>
+		</div>
+    </div>
+</body>
+</html>

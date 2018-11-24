@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+	layout:decorator="layoutEnseignant">
+<head>
+<meta charset="utf-8"/>
+<title>ENSEIGNANTS</title>
+<link rel="stylesheet" type="text/css"
+href="../static/css/spacers.css"
+th:href="@{/css/spacers.css}"/>
+</head>
+<body>
+	<div layout:fragment="content">
+				<div style= "color:Tomato;" th:if="${param.error}" class="col-md-4">
+      						USERNAME DEJA UTILISE <br/> <br/></div>
+		<div class="col-md-11">
+			<div class="panel panel-primary">
+				<div class="panel-heading">LISTE ENSEIGNANTS</div>
+				<div class="panel-body">
+				<table class="table">
+				<thead>
+				<tr>
+				<th>USERNAME</th><th>PASSWORD</th><th>NOM</th><th>PRENOM</th><th>DATE D'INSCRIPTION</th><th>EMAIL</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr th:each="e:${pagesolutions.content}">
+				<td th:if="${e.username!=enseignant.username}"  th:text="${e.username}"></td>
+				<td th:if="${e.username!=enseignant.username}" th:text="${e.password}"></td>
+				<td th:if="${e.username!=enseignant.username}" th:text="${e.nom}"></td>
+				<td th:if="${e.username!=enseignant.username}" th:text="${e.prenom}"></td>
+				<td th:if="${e.username!=enseignant.username}" th:text="${e.date}"></td>
+				<td th:if="${e.username!=enseignant.username}" th:text="${e.email}"></td>
+				</tr>
+				</tbody>
+				</table>
+				
+				</div>
+			</div>
+			<div class="container">
+			<ul class= "nav nav-pills">
+			<li th:each="p:${pages}" th:class="${p==pageCourante}?active:''">
+			<a th:text="${p}" th:href="@{listeProblemes(page=${p},username=${enseignant.username})}"></a>
+			</li></ul>
+			
+			</div>
+		</div>
+		
+						<div class="col-md-6 col-sl-6 col-xs-12 spacer40 col-md-offset-3">
+			<div class="panel panel-primary">
+				<div class="panel-heading">AJOUTER ENSEIGNANT</div>
+					<div class="panel-body">
+						<form th:action="@{/saveenseignant}"
+						method="post">
+						<div class="form-group">
+						<label class="control-label"> USERNAME </label>
+						<input type="text" placeholder="USERNAME" class="form-control" name="username1" th:required="required"/>
+						<span class="text-danger" ></span>
+						</div>
+						
+						<div class="form-group">
+						<label class="control-label"> PASSWORD </label>
+						<input type="password" placeholder="PASSWORD" class="form-control" name="password" th:required="required"/>
+						<span class="text-danger" ></span>
+						</div>
+						
+						<div class="form-group">
+						<label class="control-label"> NOM</label>
+						<input type="text" placeholder="NOM" class="form-control" name="nom" th:required="required"/>
+						<span class="text-danger" ></span>
+						</div>
+						<div class="form-group">
+						<label class="control-label"> PRENOM </label>
+						<input type="text" placeholder="PRENOM" class="form-control" name="prenom" th:required="required"/>
+						<span class="text-danger" ></span>
+						</div>
+						<div class="form-group">
+						<label class="control-label"> EMAIL </label>
+						<input type="email" placeholder="EMAIL" class="form-control" name="email" th:required="required"/>
+						<span class="text-danger" ></span>
+						</div>
+						<input type="hidden" th:field="*{enseignant.username}" class="form-control" name="username" th:required="required"/>
+						<div>
+						<button type="submit" class="btn btn-primary"> AJOUTER </button>
+						</div>
+						</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

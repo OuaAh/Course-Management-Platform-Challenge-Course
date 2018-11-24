@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+	layout:decorator="layoutEnseignant">
+<head>
+<meta charset="utf-8"/>
+<title>HISTORIQUE</title>
+</head>
+<body>
+	<div layout:fragment="content">
+						<div class="col-md-9 col-sm-9 col-xs-12 spacer40 col-md-offser-3">
+			<div class="panel panel-primary">
+				<div class="panel-heading">DESCRIPTION</div>
+				<div class="panel-body" >
+				<table class="table">
+				<tr><td style= "color:blue"> NOMBRE DE PROBLEMES SOUMIS</td>
+				<td style= "color:blue"> NOMBRE DE PROBLEMES ACCEPTES </td>
+				<td style= "color:blue"> NOMBRE DE PROBLEMES EN ATTEND </td>
+				<td style= "color:blue"> NOMBRE DE PROBLEMES REFUSES </td>
+				</tr>
+				<tr>
+				<td th:text="${problemessoumis}"></td>
+				<td th:text="${problemesacceptes}"></td>
+				<td th:text="${problemeattends}"></td>
+				<td th:text="${problemesrefuses}"></td>
+				</tr>
+				</table>
+				</div>
+				</div>
+				</div>
+		
+		<div class="col-md-9">
+			<div class="panel panel-primary">
+				<div class="panel-heading">HISTORIQUE</div>
+				<div class="panel-body">
+				<table class="table">
+				<thead>
+				<tr>
+				<th>ID</th><th>PROBLEME</th><th>DATE</th><th>RESULTAT</th>
+				<th>EDITER</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr th:each="e:${pagesolutions.content}">
+				<td th:text="${e.id}"></td>
+				<td th:text="${e.probleme.titre}"></td>
+				<td th:text="${e.date}"></td>
+				<td th:text="${e.result}"></td>
+				<td><a th:href="@{/editSoumission(id=${e.id},username=${enseignant.username})}">EDITER</a></td>
+				</tr>
+				</tbody>
+				</table>
+				
+				</div>
+			</div>
+			<div class="container">
+			<ul class= "nav nav-pills">
+			<li th:each="p:${pages}" th:class="${p==pageCourante}?active:''">
+			<a th:text="${p}" th:href="@{consulterhistorique(page=${p},username=${enseignant.username},id=${etudiant.username})}"></a>
+			</li></ul>
+			
+			</div>
+		</div>
+		
+	</div>
+</body>
+</html>

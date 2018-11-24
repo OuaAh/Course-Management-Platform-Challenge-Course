@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+	layout:decorator="layoutEtudiant">
+<head>
+<meta charset="utf-8"/>
+<title>COURS</title>
+</head>
+<body>
+	<div layout:fragment="content">
+				<div class="col-md-10">
+		<div class="panel panel-default">
+		<div class="panel-body">
+			<form th:action="@{/listeCoursetu}">
+			<input type="hidden" th:field="*{etudiant.username}" class="form-control" name="username"  />
+			<label>MOT CLE</label>
+			<input type="text" name="motCle"/>
+			<button type="submit">CHERCHER</button>
+			</form>
+			</div>
+			</div>
+		</div>
+		<div class="col-md-10">
+			<div class="panel panel-primary">
+				<div class="panel-heading">LISTE COURS</div>
+				<div class="panel-body">
+				<table class="table">
+				<thead>
+				<tr>
+				<th>ID</th><th>TITRE</th><th>DATE</th><th>ENSEIGNANT</th> <th>CONSULTER</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr th:each="e:${pagesolutions.content}">
+				<td th:text="${e.id}"></td>
+				<td th:text="${e.titre}"></td>
+				<td th:text="${e.date}"></td>
+				<td th:text="${e.enseignant.username}"></td>
+				<td><a th:href="@{/consulterCoursetu(id=${e.id},username=${etudiant.username})}">VOIR</a></td>
+				</tr>
+				</tbody>
+				</table>
+				
+				</div>
+			</div>
+			<div class="container">
+			<ul class= "nav nav-pills">
+			<li th:each="p:${pages}" th:class="${p==pageCourante}?active:''">
+			<a th:text="${p}" th:href="@{listeCoursetu(page=${p},username=${etudiant.username})}"></a>
+			</li></ul>
+			
+			</div>
+		</div>
+		
+	</div>
+</body>
+</html>
